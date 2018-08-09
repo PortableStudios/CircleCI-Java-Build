@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
-RUN apt update
-RUN apt-get install -y \
+RUN apt update && \
+    apt-get install -y \
     apt-transport-https \
     ca-certificates \
     curl \
@@ -26,4 +26,4 @@ RUN apt-get install -y \
        $(lsb_release -cs) \
        stable" && \
     apt-get update && \
-    apt-get install docker-ce
+    apt-get install -y docker-ce
