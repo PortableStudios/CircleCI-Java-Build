@@ -12,7 +12,8 @@ RUN apt update && \
     software-properties-common \
     && \
     curl -o jdk-8u45-linux-x64.rpm http://ppq-java-8u45.s3-ap-southeast-2.amazonaws.com/jdk-8u45-linux-x64.rpm && \
-    rpm -i jdk-8u45-linux-x64.rpm && \
+    tar -C /usr/share -xzf jdk-8u45-linux-x64.tar.gz && \
+    rm -rf jdk-8u45-linux-x64.tar.gz && \
     curl -o node.tar.xz https://nodejs.org/dist/v8.11.3/node-v8.11.3-linux-x64.tar.xz && \
     tar -C /usr/share/ -xf node.tar.xz && \
     rm -rf node.tar.xz && \
@@ -32,4 +33,5 @@ RUN apt update && \
     /usr/share/node-v8.11.3-linux-x64/bin/npm install -g grunt-cli bower webpack-cli && \
     apt clean
 
-ENV PATH="/usr/share/node-v8.11.3-linux-x64/bin:${PATH}"
+ENV JAVA_HOME="/usr/share/jdk1.8.0_45"
+ENV PATH="/usr/share/node-v8.11.3-linux-x64/bin/:/usr/share/jdk1.8.0_45/bin:${PATH}"
