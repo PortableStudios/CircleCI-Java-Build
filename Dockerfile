@@ -26,4 +26,5 @@ RUN apt update && \
        $(lsb_release -cs) \
        stable" && \
     apt-get update && \
-    apt-get install -y docker-ce yarn
+    apt-get install -y docker-ce yarn && \
+    npm install -g grunt-cli bower webpack-cli
