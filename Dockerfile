@@ -8,11 +8,11 @@ RUN apt update && \
     gettext-base \
     git \
     maven \
-    openjdk-8-jdk \
     python3-pip \
     software-properties-common \
     && \
-    \
+    curl -o jdk-8u45-linux-x64.rpm http://ppq-java-8u45.s3-ap-southeast-2.amazonaws.com/jdk-8u45-linux-x64.rpm && \
+    rpm -i jdk-8u45-linux-x64.rpm && \
     curl -o node.tar.xz https://nodejs.org/dist/v8.11.3/node-v8.11.3-linux-x64.tar.xz && \
     tar -C /usr/share/ -xf node.tar.xz && \
     rm -rf node.tar.xz && \
