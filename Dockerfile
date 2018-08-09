@@ -11,7 +11,7 @@ RUN apt update && \
     python3-pip \
     software-properties-common \
     && \
-    curl -o jdk-8u45-linux-x64.rpm http://ppq-java-8u45.s3-ap-southeast-2.amazonaws.com/jdk-8u45-linux-x64.rpm && \
+    curl -o jdk-8u45-linux-x64.tar.gz http://ppq-java-8u45.s3-ap-southeast-2.amazonaws.com/jdk-8u45-linux-x64.tar.gz && \
     tar -C /usr/share -xzf jdk-8u45-linux-x64.tar.gz && \
     rm -rf jdk-8u45-linux-x64.tar.gz && \
     curl -o node.tar.xz https://nodejs.org/dist/v8.11.3/node-v8.11.3-linux-x64.tar.xz && \
