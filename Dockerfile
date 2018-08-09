@@ -8,12 +8,14 @@ RUN apt update && \
     gettext-base \
     git \
     maven \
-    nodejs \
     openjdk-8-jdk \
     python3-pip \
     software-properties-common \
     && \
     \
+    curl -o node.tar.xz https://nodejs.org/dist/v8.11.3/node-v8.11.3-linux-x64.tar.xz && \
+    tar -C /usr/share/ -xf node.tar.xz && \
+    rm -rf node.tar.xz && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
     pip3 install awscli && \
@@ -27,4 +29,7 @@ RUN apt update && \
        stable" && \
     apt-get update && \
     apt-get install -y docker-ce yarn && \
-    npm install -g grunt-cli bower webpack-cli
+    /usr/share/node-v8.11.3-linux-x64/bin/npm install -g grunt-cli bower webpack-cli && \
+    apt clean
+
+ENV PATH="/usr/share/node-v8.11.3-linux-x64/bin:${PATH}"
