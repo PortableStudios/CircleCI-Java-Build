@@ -4,12 +4,12 @@ RUN apt update && \
     apt-transport-https \
     ca-certificates \
     curl \
-    curl \
     gettext-base \
     git \
     maven \
     python3-pip \
     software-properties-common \
+    sudo \
     && \
     curl -o jdk-8u45-linux-x64.tar.gz http://ppq-java-8u45.s3-ap-southeast-2.amazonaws.com/jdk-8u45-linux-x64.tar.gz && \
     tar -C /usr/share -xzf jdk-8u45-linux-x64.tar.gz && \
@@ -32,7 +32,8 @@ RUN apt update && \
     apt-get install -y docker-ce yarn && \
     /usr/share/node-v8.11.3-linux-x64/bin/npm install -g grunt-cli bower webpack-cli && \
     apt clean && \
-    useradd -ms /bin/bash ci
+    useradd -ms /bin/bash ci && \
+    echo "ci ALL = NOPASSWD : ALL" | tee /etc/sudoers.d/ci
 
 USER ci
 WORKDIR /home/ci
