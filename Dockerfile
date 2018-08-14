@@ -37,7 +37,7 @@ RUN apt update && \
        stable" && \
     apt-get update && \
     apt-get install -y docker-ce yarn && \
-    /usr/share/node-v8.11.3-linux-x64/bin/npm install -g grunt-cli bower webpack-cli && \
+    /usr/local/lib/nodejs/node-${NODE_VERSION}/bin/npm install -g grunt-cli bower webpack-cli && \
     apt clean && \
     useradd -ms /bin/bash ci && \
     echo "ci ALL = NOPASSWD : ALL" | tee /etc/sudoers.d/ci
