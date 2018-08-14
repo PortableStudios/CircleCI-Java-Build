@@ -1,4 +1,9 @@
 FROM ubuntu:18.04
+
+ENV NODE_VERSION=v8.11.3
+ENV NODE_DISTRO=linux-x64
+
+
 RUN apt update && \
     apt-get install -y \
     apt-transport-https \
@@ -14,8 +19,10 @@ RUN apt update && \
     curl -o jdk-8u45-linux-x64.tar.gz http://ppq-java-8u45.s3-ap-southeast-2.amazonaws.com/jdk-8u45-linux-x64.tar.gz && \
     tar -C /usr/share -xzf jdk-8u45-linux-x64.tar.gz && \
     rm -rf jdk-8u45-linux-x64.tar.gz && \
-    curl -o node.tar.xz https://nodejs.org/dist/v8.11.3/node-v8.11.3-linux-x64.tar.xz && \
-    tar -C /usr/share/ -xf node.tar.xz && \
+    curl -o node.tar.xz https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-${NODE_DISTRO}.tar.xz && \
+    sudo mkdir /usr/local/lib/nodejs
+    sudo tar -xJvf node-${NODE_VERSION}-${NODE_DISTRO}.tar.xz -C /usr/local/lib/nodejs
+    sudo mv /usr/local/lib/nodejs/node-${NODE_VERSION}-${NODE_DISTRO} /usr/local/lib/nodejs/node-${NODE_VERSION}
     rm -rf node.tar.xz && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
@@ -38,5 +45,6 @@ RUN apt update && \
 USER ci
 WORKDIR /home/ci
 
+ENV NODEJS_HOME="/usr/local/lib/nodejs/node-${NODE_VERSION}/bin"
 ENV JAVA_HOME="/usr/share/jdk1.8.0_45"
-ENV PATH="/usr/share/node-v8.11.3-linux-x64/bin/:/usr/share/jdk1.8.0_45/bin:${PATH}"
+ENV PATH="${NODEJS_HOME}:${JAVA_HOME}/bin:${PATH}"
