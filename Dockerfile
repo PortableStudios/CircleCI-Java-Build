@@ -34,7 +34,7 @@ RUN apt update && \
     apt clean && \
     useradd -ms /bin/bash ci
 
-USER newuser
+USER ci
 WORKDIR /home/ci
 
 ENV JAVA_HOME="/usr/share/jdk1.8.0_45"
