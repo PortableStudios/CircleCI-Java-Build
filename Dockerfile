@@ -41,7 +41,7 @@ RUN apt update && \
     apt clean && \
     useradd -ms /bin/bash ci && \
     echo "ci ALL = NOPASSWD : ALL" | tee /etc/sudoers.d/ci
-e
+
 USER ci
 WORKDIR /home/ci
 
