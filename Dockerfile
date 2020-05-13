@@ -22,7 +22,6 @@ RUN apt update && \
     curl -o node.tar.xz https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-${NODE_DISTRO}.tar.xz && \
     mkdir /usr/local/lib/nodejs && \
     tar -xJvf node.tar.xz -C /usr/local/lib/nodejs && \
-    mv /usr/local/lib/nodejs/node-${NODE_VERSION}-${NODE_DISTRO} /usr/local/lib/nodejs/node-${NODE_VERSION} && \
     rm -rf node.tar.xz && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
@@ -45,6 +44,6 @@ RUN apt update && \
 USER ci
 WORKDIR /home/ci
 
-ENV NODEJS_HOME="/usr/local/lib/nodejs/node-${NODE_VERSION}/bin"
+ENV NODEJS_HOME="/usr/local/lib/nodejs/node-${NODE_VERSION}-${NODE_DISTRO}/bin"
 ENV JAVA_HOME="/usr/share/jdk1.8.0_45"
 ENV PATH="${NODEJS_HOME}:${JAVA_HOME}/bin:${PATH}"
