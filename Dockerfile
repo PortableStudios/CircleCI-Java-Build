@@ -21,7 +21,7 @@ RUN apt update && \
     rm -rf jdk-8u45-linux-x64.tar.gz && \
     curl -o node.tar.xz https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-${NODE_DISTRO}.tar.xz && \
     mkdir /usr/local/lib/nodejs && \
-    tar -xJvf node-${NODE_VERSION}-${NODE_DISTRO}.tar.xz -C /usr/local/lib/nodejs && \
+    tar -xJvf node.tar.xz -C /usr/local/lib/nodejs && \
     mv /usr/local/lib/nodejs/node-${NODE_VERSION}-${NODE_DISTRO} /usr/local/lib/nodejs/node-${NODE_VERSION} && \
     rm -rf node.tar.xz && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
@@ -41,7 +41,7 @@ RUN apt update && \
     apt clean && \
     useradd -ms /bin/bash ci && \
     echo "ci ALL = NOPASSWD : ALL" | tee /etc/sudoers.d/ci
-
+e
 USER ci
 WORKDIR /home/ci
 
