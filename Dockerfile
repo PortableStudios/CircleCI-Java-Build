@@ -13,7 +13,7 @@ RUN apt update && \
     software-properties-common \
     && \
     \
-    curl -o node.tar.xz https://nodejs.org/dist/v8.11.3/node-v8.11.3-linux-x64.tar.xz && \
+    curl -o node.tar.xz https://nodejs.org/dist/v12.18.3/node-v12.18.3-linux-x64.tar.xz && \
     tar -C /usr/share/ -xf node.tar.xz && \
     rm -rf node.tar.xz && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
@@ -29,7 +29,7 @@ RUN apt update && \
        stable" && \
     apt-get update && \
     apt-get install -y docker-ce yarn && \
-    /usr/share/node-v8.11.3-linux-x64/bin/npm install -g grunt-cli bower webpack-cli && \
+    /usr/share/node-v12.18.3-linux-x64/bin/npm install -g grunt-cli bower webpack-cli && \
     apt clean
 
-ENV PATH="/usr/share/node-v8.11.3-linux-x64/bin:${PATH}"
+ENV PATH="/usr/share/node-v12.18.3-linux-x64/bin:${PATH}"
