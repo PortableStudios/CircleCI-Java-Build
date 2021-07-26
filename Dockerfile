@@ -22,7 +22,7 @@ RUN apt update && \
     rm -rf jdk-8u45-linux-x64.tar.gz && \
     curl -o node.tar.xz https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-${NODE_DISTRO}.tar.xz && \
     mkdir /usr/local/lib/nodejs && \
-    ls /usr/local/lib/nodejs && \
+    ls /usr/local/lib/nodejs/node-${NODE_VERSION}-${NODE_DISTRO}/bin && \
     tar -xJvf node.tar.xz -C /usr/share && \
     rm -rf node.tar.xz && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
@@ -37,8 +37,8 @@ RUN apt update && \
        $(lsb_release -cs) \
        stable" && \
     apt-get update && \
-    apt-get install -y docker-ce yarn && \
-    /usr/local/lib/nodejs/node-${NODE_VERSION}-${NODE_DISTRO}/bin/npm install -g grunt-cli bower webpack-cli && \
+    apt-get install -y docker-ce && \
+    /usr/local/lib/nodejs/node-${NODE_VERSION}-${NODE_DISTRO}/bin/npm install -g yarn grunt-cli bower webpack-cli && \
     apt clean && \
     useradd -ms /bin/bash ci && \
     echo "ci ALL = NOPASSWD : ALL" | tee /etc/sudoers.d/ci
