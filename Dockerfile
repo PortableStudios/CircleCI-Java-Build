@@ -1,10 +1,11 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 ENV NODE_VERSION=v14.17.3
 ENV NODE_DISTRO=linux-x64
-
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update && \
+    ln -fs /usr/share/zoneinfo/Australia/Melbourne /etc/localtime && \
     apt-get install -y \
     apt-transport-https \
     ca-certificates \
