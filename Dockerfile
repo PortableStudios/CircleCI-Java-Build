@@ -3,6 +3,9 @@ FROM ubuntu:20.04
 ENV NODE_VERSION=v14.17.3
 ENV NODE_DISTRO=linux-x64
 ENV DEBIAN_FRONTEND=noninteractive
+ENV NODEJS_HOME="/usr/share/node-${NODE_VERSION}-${NODE_DISTRO}/bin"
+ENV JAVA_HOME="/usr/share/jdk1.8.0_45"
+ENV PATH="${NODEJS_HOME}:${JAVA_HOME}/bin:${PATH}"
 
 RUN apt update && \
     ln -fs /usr/share/zoneinfo/Australia/Melbourne /etc/localtime && \
@@ -34,7 +37,7 @@ RUN apt update && \
        stable" && \
     apt-get update && \
     apt-get install -y docker-ce && \
-    /usr/share/node-${NODE_VERSION}-${NODE_DISTRO}/bin/npm install -g yarn grunt-cli bower webpack-cli && \
+    npm install -g yarn grunt-cli bower webpack-cli && \
     apt clean && \
     useradd -ms /bin/bash ci && \
     echo "ci ALL = NOPASSWD : ALL" | tee /etc/sudoers.d/ci
@@ -42,6 +45,4 @@ RUN apt update && \
 USER ci
 WORKDIR /home/ci
 
-ENV NODEJS_HOME="/usr/share/node-${NODE_VERSION}-${NODE_DISTRO}/bin"
-ENV JAVA_HOME="/usr/share/jdk1.8.0_45"
-ENV PATH="${NODEJS_HOME}:${JAVA_HOME}/bin:${PATH}"
+
